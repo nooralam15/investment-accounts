@@ -7,11 +7,11 @@ let goBtnEl = document.getElementById("go");
 let menuEl = document.getElementById("menu");
 
 // Global Variable
+let maxAmount = 5000; // account values should be b/t 0 and max
 let accounts = [];
 for (let n = 0; n < 200; n++) {
-  accounts.push(Math.random() * 5000)
+  accounts.push(Math.random() * maxAmount)
 }
-let maxAmount = 5000; // account values should be b/t 0 and max
 
 // Display Data
 drawArray();
@@ -79,44 +79,61 @@ function generousDonor() {
       accounts[i] += 500
       count++
     }
-  }
+  } 
   outputEl.innerHTML = "Generous Donor " + count * 500;
 }
-
 
 function hackerAttack() {
   // A hacker steals 5% from every account.
   // Modify the investment account array to apply this theft.
   // Output the total amount that was stolen.
+
   let theftCount = 0
   for (let i = 0; i < accounts.length; i++) {
     accounts[i] -= (accounts[i] * 0.05)
     theftCount += accounts[i]
   }
-
-  outputEl.innerHTML = "Hacker Attack " + theftCount * accounts.length
+  outputEl.innerHTML = "Hacker Attack " + theftCount * accounts.length 
 }
 
 function investmentStats() {
   // Output the minimum account amount, the maximum account amount
   // and the average account amount.
+  let maxVal = Math.max(...accounts)
+  let minVal = Math.min(...accounts)
+  let totalVal = 0
+  for (let i = 0; i < accounts.length; i++) {
+    totalVal += accounts[i]
 
-  outputEl.innerHTML = "Investment Stats";
+  }  
+  let avgVal = totalVal/accounts.length
+  outputEl.innerHTML = `Investment Stats: Max Account Value: ${maxVal} Min Account Value: ${maxVal} Average Value: ${avgVal}`;
 }
 
 function addAccount() {
   // Prompt for a new account amount and add this to the invesment account
   // array. Output a confirmation that a new account was added with an
   // opening amount of _______.
-
-  outputEl.innerHTML = "Add Account";
+  let newAmount = Number(prompt("Enter Account Amount"))
+  if (newAmount > 5000) {
+    return alert("amount is too high")
+  }
+  accounts.push(newAmount)
+  outputEl.innerHTML = `Add Account: Successfully added a new account with a value of ${newAmount}`
 }
 
 function removeLow() {
   // Remove all accounts that are below $500.
   // Output how many accounts were removed.
-
-  outputEl.innerHTML = "Remove Low Accounts";
+  let count = 0
+  for (let i = 0; i < accounts.length; i++) {
+    if (accounts[i] < 500) {
+      accounts.splice(i, 1)
+      i --
+      count++
+    }
+  }  
+  outputEl.innerHTML = `Remove Low Accounts: ${count} Accounts were removed`;
 }
 
 function robinHood() {
@@ -126,6 +143,23 @@ function robinHood() {
   // accounts that have less than $1000.
   // Output how many accounts received money and 
   // how much each account received.
-
-  outputEl.innerHTML = "Robin Hood";
+  let robinTax = 0
+  let count = 0
+  for (let i = 0; i < accounts.length; i++) {
+    if (accounts[i] > 4000) {
+      accounts[i] -= 400
+      robinTax += 400
+    }
+    if (accounts[i] < 1000 ) {
+      count++
+    }
+  }
+  //distribute the money
+  let taxDistribution = robinTax / count
+  for (let i = 0; i < accounts.length; i++) {
+    if (accounts[i] < 1000) {
+      accounts[i] += taxDistribution
+    }
+  }  
+  outputEl.innerHTML = `Robin Hood: ${count} Accounts recieved money and they each recieved ${taxDistribution}`;
 }
