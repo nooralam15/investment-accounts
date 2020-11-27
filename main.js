@@ -89,8 +89,7 @@ function hackerAttack() {
   // Output the total amount that was stolen.
 
   for (let i = 0; i < accounts.length; i++) {
-    //accounts[i] -= (accounts[i] * 0.05)
-    accounts[i] 0.95
+    accounts[i] -= (accounts[i] * 0.05)
 
   }
 
