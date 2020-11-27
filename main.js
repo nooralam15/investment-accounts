@@ -118,6 +118,9 @@ function addAccount() {
   if (newAmount > 5000) {
     return alert("amount is too high")
   }
+  else if (newAmount < 0) {
+    return alert("amount is too low")
+  }
   accounts.push(newAmount)
   outputEl.innerHTML = `Add Account: Successfully added a new account with a value of ${newAmount}`
 }
