@@ -83,17 +83,18 @@ function generousDonor() {
   outputEl.innerHTML = "Generous Donor " + count * 500;
 }
 
+
 function hackerAttack() {
   // A hacker steals 5% from every account.
   // Modify the investment account array to apply this theft.
   // Output the total amount that was stolen.
-
+  let theftCount = 0
   for (let i = 0; i < accounts.length; i++) {
     accounts[i] -= (accounts[i] * 0.05)
-
+    theftCount += accounts[i]
   }
 
-  outputEl.innerHTML = "Hacker Attack " 
+  outputEl.innerHTML = "Hacker Attack " + theftCount * accounts.length
 }
 
 function investmentStats() {
