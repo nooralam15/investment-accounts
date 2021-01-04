@@ -90,10 +90,10 @@ function hackerAttack() {
 
   let theftCount = 0
   for (let i = 0; i < accounts.length; i++) {
+    theftCount += (accounts[i] * 0.05)
     accounts[i] -= (accounts[i] * 0.05)
-    theftCount += accounts[i]
   }
-  outputEl.innerHTML = "Hacker Attack " + theftCount * accounts.length 
+  outputEl.innerHTML = "Hacker Attack " + theftCount
 }
 
 function investmentStats() {
